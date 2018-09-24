@@ -10,8 +10,12 @@ declare namespace PptxGenJS {
   const version: string;
   type ChartType = "AREA" | "BAR" | "BUBBLE" | "DOUGHNUT" | "LINE" | "PIE" | "RADAR" | "SCATTER";
   type JsZipOutputType = "arraybuffer" | "base64" | "binarystring" | "blob" | "nodebuffer" | "uint8array";
-  type LayoutName = "LAYOUT_4x3" | "LAYOUT_16x9" | "LAYOUT_16x10" | "LAYOUT_WIDE" | "LAYOUT_USER";
-
+  type LayoutName = "LAYOUT_4x3" | "LAYOUT_16x9" | "LAYOUT_16x10" | "LAYOUT_WIDE";
+  interface Layout = {
+    name: string;
+    width: number;
+    height: number;
+  }
   type Color = string;
   type Coord = number | string; // string is in form 'n%'
 
@@ -41,6 +45,7 @@ declare namespace PptxGenJS {
     align?: "left" | "center" | "right";
     fontSize?: number;
     color?: string;
+    valign?: "top" | "middle" | "bottom";
   }
 
   interface MasterSlideOptions {
@@ -71,7 +76,7 @@ declare namespace PptxGenJS {
     // Presentation Props
     getLayout(): string;
     setBrowser(isBrowser: boolean): void;
-    setLayout(layoutName: LayoutName): void;
+    setLayout(layout: LayoutName | Layout): void;
     setRTL(isRTL: boolean): void;
 
     // Presentation Metadata
